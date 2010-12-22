@@ -826,9 +826,15 @@ protected:
             return false;
         }
         if (!glewContextIsSupported(const_cast<GLEWContext *>(glewGetContext()),
-                    "GL_VERSION_2_1 GL_EXT_framebuffer_object"))
+                    "GL_VERSION_2_1"))
         {
-            msg::err("This OpenGL implementation does not support OpenGL 2.1 and framebuffer objects");
+            msg::err("This OpenGL implementation does not support OpenGL 2.1");
+            return false;
+        }
+        if (!glewContextIsSupported(const_cast<GLEWContext *>(glewGetContext()),
+                    "GL_EXT_framebuffer_object"))
+        {
+            msg::err("This OpenGL implementation does not support framebuffer objects");
             return false;
         }
 

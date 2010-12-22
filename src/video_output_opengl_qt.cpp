@@ -101,10 +101,15 @@ void video_output_opengl_qt_widget::initializeGL()
             throw exc(std::string("Cannot initialize GLEW: ")
                     + reinterpret_cast<const char *>(glewGetErrorString(err)));
         }
-        if (!glewIsSupported("GL_VERSION_2_1 GL_EXT_framebuffer_object"))
+        if (!glewIsSupported("GL_VERSION_2_1"))
         {
             throw exc(std::string("This OpenGL implementation does not support "
-                        "OpenGL 2.1 and framebuffer objects"));
+                        "OpenGL 2.1"));
+        }
+        if (!glewIsSupported("GL_EXT_framebuffer_object"))
+        {
+            throw exc(std::string("This OpenGL implementation does not support "
+                        "framebuffer objects"));
         }
         _vo->initialize();
     }
